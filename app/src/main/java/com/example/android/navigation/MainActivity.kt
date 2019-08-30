@@ -19,6 +19,8 @@ package com.example.android.navigation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.android.navigation.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -26,5 +28,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         @Suppress("UNUSED_VARIABLE")
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        // Link the NavController to ActionBar with NavigationUI.setupWithNavController
+        // 1. Find NavController
+        val navController = this.findNavController(R.id.myNavHostFragment)
+        // 2. Link the NavController to ActionBar
+        NavigationUI.setupActionBarWithNavController(this, navController)
+
+    }
+
+    // Override onSupportNavigateUp to define what happens when we press Up
+    override fun onSupportNavigateUp(): Boolean {
+        // 1. Find NavController
+        val navController = this.findNavController(R.id.myNavHostFragment)
+        // 2. Call navigateUp on the navController
+        return navController.navigateUp()
     }
 }

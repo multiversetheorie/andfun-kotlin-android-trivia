@@ -21,12 +21,17 @@ class TitleFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding: FragmentTitleBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_title, container, false)
+//      V1:
 //      binding.playButton.setOnClickListener { view: View ->
 //          view.findNavController().navigate(R.id.action_titleFragment_to_gameFragment)
 //      }
-        binding.playButton.setOnClickListener(
-                Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_gameFragment)
-        )
+//      V2:
+//        binding.playButton.setOnClickListener(
+//                Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_gameFragment)
+//        )
+        binding.playButton.setOnClickListener { v: View ->
+            v.findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
+        }
         // This fragment has a menu
         setHasOptionsMenu(true)
 //        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
